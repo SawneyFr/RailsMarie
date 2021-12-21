@@ -1,0 +1,3 @@
+class Pandemur < ApplicationRecord
+
+end

@@ -1,0 +1,45 @@
+<button id = "location">Localisez-moi</button><br/>
+<p id = "status"></p>
+<p id = "Longitude"></p>
+<p id = "Latitude"></p>
+<a id = "lien_GoogleMap"></a><br>
+<a id = "lien_Waze"></a><br>
+
+<script>
+    function Localisation() {
+
+        const status = document.querySelector('#status');
+        const Longitude = document.querySelector('#Longitude');
+        const Latitude = document.querySelector('#Latitude');
+
+        const GoogleMaps = document.querySelector('#lien_GoogleMap');
+        const Waze = document.querySelector('#lien_Waze');
+
+        function success(position) {
+            const latitude  = position.coords.latitude;
+            const longitude = position.coords.longitude;
+
+            status.textContent = '';
+            Latitude.textContent = `Latitude: ${latitude}`;
+            Longitude.textContent = `Longitude: ${longitude}`;
+            GoogleMaps.textContent = 'Aller à la destination avec Google Maps';
+            Waze.textContent = "Aller à la destination avec Waze";
+            GoogleMaps.href = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+            Waze.href = `https://waze.com/ul?q=66%20Acacia%20Avenue&ll=${latitude},${longitude}&navigate=yes` //fonctionne bien !
+        }
+
+        function error() {
+            status.textContent = 'Vous devez autoriser la localisation';
+        }
+
+        if (!navigator.geolocation) {
+            status.textContent = 'La géolocalisation n est pas supporté par votre moteur de recherche';
+        } else {
+            status.textContent = 'Chargement…';
+            navigator.geolocation.getCurrentPosition(success, error);
+        }
+
+    }
+
+    document.querySelector('#location').addEventListener('click', Localisation);
+</script>

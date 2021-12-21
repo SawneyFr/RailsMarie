@@ -1,0 +1,41 @@
+<h1> Liste des travaux : </h1>
+
+<div id="tableau">
+  <table>
+  <tr>
+    <td> parent </td>
+    <td> nom </td>
+    <td> prix </td>
+  </tr>
+  <% @posts.each do |post| %>
+  <tr>
+    <td> <%= post.parent %></td>
+    <td> <%= post.name %></td>
+    <td> <%= post.prix %></td>
+    <td><a href="<%= edit_post_path(post.id) %>">éditer</a></td>
+  </tr>
+  <% end %>
+</table>
+
+<p>
+  <a href="<%= new_post_path %>">Créer un travail</a>
+</p>
+
+</div>
+<style>
+  table td {
+      border:1px solid black;
+      padding: 7px;
+
+  }
+  table tr:first-child {text-align: center;}
+  #tableau{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      width:100%;
+  }
+  table {
+      width:80%;
+  }
+</style>
